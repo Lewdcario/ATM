@@ -1,9 +1,14 @@
 # Eclipse Stuff
-/.settings
-/bin
-.project
+\.metadata
+\.recommenders
+\bin
+\.settings
 .classpath
-/.metadata
+
+
+.project
+
 
 # Unrelated files
-/Final GA Options
+\Final GA Options
+
