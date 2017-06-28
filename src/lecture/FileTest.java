@@ -22,7 +22,7 @@ public class FileTest {
 			
 			// Add each line to the StringBuilder
 			StringBuilder sb = new StringBuilder();
-			while(in.hasNext()) sb.append(in.next()).append("\n");
+			while(in.hasNextLine()) sb.append(in.nextLine() + "\n");
 
 			in.close(); // Make sure to close the scanner
 			String outString = sb.toString(); // StringBuilders *aren't* strings themselves
