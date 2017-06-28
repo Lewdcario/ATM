@@ -1,7 +1,5 @@
 package lecture;
 
-import static java.lang.System.out;
-
 public class Time {
 	private int hour;
 	private int minute;

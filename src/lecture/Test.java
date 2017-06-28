@@ -28,6 +28,8 @@ public class Test {
 		out.println("Enter a double: ");
 		double dub = input.nextDouble();
 		
+		input.close();
+		
 		out.println("Integer: " + integer + "\nDouble: " + dub);
 		
 		Time time = new Time(555550000);
