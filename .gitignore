@@ -1,0 +1,9 @@
+# Eclipse Stuff
+/.settings
+/bin
+.project
+.classpath
+/.metadata
+
+# Unrelated files
+/Final GA Options
