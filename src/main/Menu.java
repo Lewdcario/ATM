@@ -12,7 +12,7 @@ import javax.swing.JPasswordField;
 
 public class Menu {
 
-	private JFrame frame;
+	private JFrame frame1;
 	private JTextField textField;
 	private JPasswordField passwordField;
 
@@ -24,77 +24,67 @@ public class Menu {
 			public void run() {
 				try {
 					Menu window = new Menu();
-					window.frame.setVisible(true);
+					window.frame1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
 	public Menu() {
 		initialize();
 	}
-	
-	/*
-	 * Second "frame" code should be here
-	 * Likely, every button will need to be similar to this, as they invoke a new window, but 
-	 * they need to be able to return to the original frame after success.
-	 */
-	private void secondFrame() {
-		frame.setVisible(false); // Hides everything with the first frame
-		
-		JFrame frame = new JFrame("Test");
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		JLabel lblTest = new JLabel("Frame 2");
-		lblTest.setBounds(21, 73, 177, 64);
-		frame.getContentPane().add(lblTest);
-		
-		frame.setVisible(true);
-	}
 
+	private void depositWindow() {
+		Deposit window = new Deposit();
+		window.frameDeposit.setVisible(true);
+	}
+	
+	private void withdrawWindow() {
+	Withdraw window = new Withdraw();
+	window.frameWithdraw.setVisible(true);
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		// Initializing first frame
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame1 = new JFrame();
+		frame1.setBounds(100, 100, 450, 300);
+		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame1.getContentPane().setLayout(null);
 		
 		JLabel lblTest = new JLabel("Username");
 		lblTest.setBounds(32, 44, 125, 26);
-		frame.getContentPane().add(lblTest);
+		frame1.getContentPane().add(lblTest);
 		
 		JLabel label = new JLabel("Password");
 		label.setBounds(32, 96, 125, 26);
-		frame.getContentPane().add(label);
+		frame1.getContentPane().add(label);
 			
 		textField = new JTextField();
 		textField.setBounds(178, 44, 186, 29);
-		frame.getContentPane().add(textField);
+		frame1.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(178, 93, 186, 29);
-		frame.getContentPane().add(passwordField);
+		frame1.getContentPane().add(passwordField);
 		
 		JButton closeFrameButton = new JButton("click me to close this frame");
 		// Start second frame, login successful, will probably have to manually code buttons to go in other frames
 		closeFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("button clicked!");
-				secondFrame();
+				frame1.dispose();
+				depositWindow();
 			}
 		});
 		closeFrameButton.setBounds(44, 155, 338, 53);
-		frame.getContentPane().add(closeFrameButton);
+		frame1.getContentPane().add(closeFrameButton);
 	}
 }
