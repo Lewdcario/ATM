@@ -113,8 +113,8 @@ public class Account extends FileManager {
 	 * @throws errnum enough money if provided amount is greater than the user's balance.
 	 */
 	public void removeMoney(int amount) {
-		if (this.getBalance() < amount) throw new Error("Not enough money");
-		this.changeBalance(this.balance - amount);
+		if (this.getBalance() < amount) Error.print(4);
+		else this.changeBalance(this.balance - amount);
 	}
 
 	public String toString() {
@@ -130,5 +130,6 @@ public class Account extends FileManager {
 		System.out.println("new balance: " + Isabella.getBalance() + "\n");
 		System.out.println("file content:");
 		Isabella.printFile();
+		Error.print(3);
 	}
 }

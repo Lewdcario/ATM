@@ -1,17 +1,12 @@
 package main;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 
 public class FileManager {
 	private String DIR = null;
@@ -38,22 +33,21 @@ public class FileManager {
 	}
 	
 	/**
-	 * @return the contentString
+	 * @return the content
 	 */
 	public String getContent() {
 		return this.content;
 	}
 	
 	/**
-	 * @param path
+	 * @param dir the dir to set
 	 */
-	public void setDir(String path) {
-		this.DIR = path;
+	public void setDir(String dir) {
+		this.DIR = dir;
 	}
 	
-	
 	/**
-	 * @param path
+	 * @param path the path to set
 	 */
 	public void setPath(Path path) {
 		this.PATH = path;
@@ -77,13 +71,16 @@ public class FileManager {
 	 * Checks if given path exists and sets the DIR and PATH for the class.
 	 * @param path The path to attempt to read a file from.
 	 * @return Nothing.
+	 * @throws Exception 
 	 */
 	private void readFile(String path) {
 		File f = new File(path);
-		if (!f.exists() || f.isDirectory()) throw new Error("File not Found");
-		this.setDir(f.getPath());
-		this.setPath(Paths.get(this.DIR));
-		this.update();
+		if (!f.exists() || f.isDirectory()) Error.print(0);
+		else {
+			this.setDir(f.getPath());
+			this.setPath(Paths.get(this.DIR));
+			this.update();
+		}
 	}
 	
 	/**
@@ -95,28 +92,9 @@ public class FileManager {
 			this.setContent(new String(Files.readAllBytes(this.PATH), StandardCharsets.UTF_8));
 			this.setStringArray(this.content.split("\\r?\\n", -1));
 		} catch (IOException e) {
+			Error.print(1);
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * Reads file from set DIR and converts it to a string array.
-	 * @return String[] file contents.
-	 */
-	@SuppressWarnings("unused")
-	private String[] fileToArray() {
-		InputStream is = null;
-		try { is = new FileInputStream(this.DIR); } catch(Exception ignored) {}
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		ArrayList<String> list = new ArrayList<String>();
-		
-		String line;
-		try { while ((line = br.readLine()) != null) list.add(line); } catch(Exception ignored) {}
-		
-		String[] stringArr = list.toArray(new String[0]);
-
-		return stringArr;
 	}
 
 	/**
@@ -129,6 +107,7 @@ public class FileManager {
 			Files.write(this.PATH, content.getBytes(), option);
 			this.update();
 		} catch (IOException e) {
+			Error.print(1);
 			e.printStackTrace();
 		}
 	}
@@ -158,7 +137,6 @@ public class FileManager {
 	 * @return Nothing.
 	 */
 	public void replace(String original, String updated) {
-		if (this.content == null) throw new Error("Could not parse file to update.");
 		this.content = this.content.replaceAll("(?i)(?<=[\r\n]+)(" + original + ")(?=[\r\n]+)", updated);
 		this.rewrite(this.content);
 	}
