@@ -7,9 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.Font;
 
-public class Deposit{
 
-	JFrame frameDeposit;
+public class ChangePassword{
+
+	JFrame frameChangePassword;
 	/**
 	 * Launch the application.
 	 */
@@ -17,8 +18,8 @@ public class Deposit{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Deposit window = new Deposit();
-					window.frameDeposit.setVisible(true);
+					ChangePassword window = new ChangePassword();
+					window.frameChangePassword.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -29,7 +30,7 @@ public class Deposit{
 	/**
 	 * Create the application.
 	 */
-	public Deposit() {
+	public ChangePassword() {
 		initialize();
 		
 	}
@@ -40,21 +41,21 @@ public class Deposit{
 	
 	private void initialize() {
 		
-		frameDeposit = new JFrame();
-		frameDeposit.setBounds(100, 100, 450, 300);
-		frameDeposit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameDeposit.getContentPane().setLayout(null);
+		frameChangePassword = new JFrame();
+		frameChangePassword.setBounds(100, 100, 450, 300);
+		frameChangePassword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameChangePassword.getContentPane().setLayout(null);
 		
 		JButton closeFrameButton = new JButton("Return to Main Menu");
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		closeFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frameDeposit.dispose();
+				frameChangePassword.dispose();
 				menuWindow();
 			}
 		});
 		closeFrameButton.setBounds(44, 155, 338, 53);
-		frameDeposit.getContentPane().add(closeFrameButton);
+		frameChangePassword.getContentPane().add(closeFrameButton);
 	}
 }

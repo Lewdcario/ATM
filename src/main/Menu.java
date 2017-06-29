@@ -6,15 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 
 public class Menu {
 
-	private JFrame frame1;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	JFrame frameMenu;
 
 	/**
 	 * Launch the application.
@@ -24,67 +19,112 @@ public class Menu {
 			public void run() {
 				try {
 					Menu window = new Menu();
-					window.frame1.setVisible(true);
+					window.frameMenu.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+
 	/**
 	 * Create the application.
 	 */
 	public Menu() {
 		initialize();
 	}
-
-	private void depositWindow() {
-		Deposit window = new Deposit();
-		window.frameDeposit.setVisible(true);
+	private void depositMenu() {
+	Deposit window = new Deposit();
+	window.frameDeposit.setVisible(true);
 	}
-	
-	private void withdrawWindow() {
+	private void withdrawMenu() {
 	Withdraw window = new Withdraw();
 	window.frameWithdraw.setVisible(true);
 	}
-	
+	private void CheckBalanceMenu() {
+		CheckBalance window = new CheckBalance();
+		window.frameCheckBalance.setVisible(true);
+		}
+	private void ChangePasswordMenu() {
+		CheckBalance window = new CheckBalance();
+		window.frameCheckBalance.setVisible(true);
+		}
+	private void TransferMenu() {
+		CheckBalance window = new CheckBalance();
+		window.frameCheckBalance.setVisible(true);
+		}
+	private void LoginMenu() {
+		Login window = new Login();
+		window.frameLoginMenu.setVisible(true);
+		}
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		// Initializing first frame
-		frame1 = new JFrame();
-		frame1.setBounds(100, 100, 450, 300);
-		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame1.getContentPane().setLayout(null);
 		
-		JLabel lblTest = new JLabel("Username");
-		lblTest.setBounds(32, 44, 125, 26);
-		frame1.getContentPane().add(lblTest);
+		frameMenu = new JFrame();
+		frameMenu.setBounds(100, 100, 450, 300);
+		frameMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameMenu.getContentPane().setLayout(null);
 		
-		JLabel label = new JLabel("Password");
-		label.setBounds(32, 96, 125, 26);
-		frame1.getContentPane().add(label);
-			
-		textField = new JTextField();
-		textField.setBounds(178, 44, 186, 29);
-		frame1.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(178, 93, 186, 29);
-		frame1.getContentPane().add(passwordField);
-		
-		JButton closeFrameButton = new JButton("click me to close this frame");
-		// Start second frame, login successful, will probably have to manually code buttons to go in other frames
-		closeFrameButton.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("Deposit");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("button clicked!");
-				frame1.dispose();
-				depositWindow();
+				frameMenu.dispose();
+				depositMenu();
 			}
 		});
-		closeFrameButton.setBounds(44, 155, 338, 53);
-		frame1.getContentPane().add(closeFrameButton);
+		btnNewButton.setBounds(24, 30, 128, 51);
+		frameMenu.getContentPane().add(btnNewButton);
+		
+		JButton btnCheckBalance = new JButton("Check Balance");
+		btnCheckBalance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameMenu.dispose();
+				CheckBalanceMenu();
+			}
+		});
+		btnCheckBalance.setBounds(24, 92, 128, 51);
+		frameMenu.getContentPane().add(btnCheckBalance);
+		
+		JButton btnChangePassword = new JButton("Change Password");
+		btnChangePassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameMenu.dispose();
+				ChangePasswordMenu();
+			}
+		});
+		btnChangePassword.setBounds(24, 157, 128, 51);
+		frameMenu.getContentPane().add(btnChangePassword);
+		
+		JButton btnWithdraw = new JButton("Withdraw");
+		btnWithdraw.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameMenu.dispose();
+				withdrawMenu();
+			}
+		});
+		btnWithdraw.setBounds(162, 30, 128, 51);
+		frameMenu.getContentPane().add(btnWithdraw);
+		
+		JButton btnMakeATransfer = new JButton("Make a Transfer");
+		btnMakeATransfer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameMenu.dispose();
+				TransferMenu();
+			}
+		});
+		btnMakeATransfer.setBounds(162, 92, 128, 51);
+		frameMenu.getContentPane().add(btnMakeATransfer);
+		
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameMenu.dispose();
+				LoginMenu();
+			}
+		});
+		btnLogout.setBounds(162, 157, 128, 51);
+		frameMenu.getContentPane().add(btnLogout);
 	}
 }

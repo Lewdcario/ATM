@@ -1,14 +1,16 @@
 package main;
 
 import java.awt.EventQueue;
-
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.Font;
 
-public class Withdraw {
+
+public class Withdraw{
 
 	JFrame frameWithdraw;
-
 	/**
 	 * Launch the application.
 	 */
@@ -30,24 +32,30 @@ public class Withdraw {
 	 */
 	public Withdraw() {
 		initialize();
+		
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	private void menuWindow() {
+	Menu window = new Menu();
+	window.frameMenu.setVisible(true);
+	}
+	
 	private void initialize() {
+		
 		frameWithdraw = new JFrame();
 		frameWithdraw.setBounds(100, 100, 450, 300);
 		frameWithdraw.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameWithdraw.getContentPane().setLayout(null);
 		
-		JButton btnSuper = new JButton("Withdraw");
-		btnSuper.setBounds(41, 33, 89, 23);
-		frameWithdraw.getContentPane().add(btnSuper);
-		
-		JButton btnButtons = new JButton("Testing");
-		btnButtons.setBounds(41, 98, 89, 23);
-		frameWithdraw.getContentPane().add(btnButtons);
-	}
+		JButton closeFrameButton = new JButton("Return to Main Menu");
+		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
+		closeFrameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameWithdraw.dispose();
+				menuWindow();
+			}
+		});
+		closeFrameButton.setBounds(44, 155, 338, 53);
+		frameWithdraw.getContentPane().add(closeFrameButton);
+	}
 }
