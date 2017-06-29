@@ -12,15 +12,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
-public class FileHandler {
+public class FileManager {
 	private String DIR = null;
 	private Path PATH = null;
-	private String content = null;
+	protected String content = null;
 	private String[] stringArray = null;
 	
-	public FileHandler(String path) {
+	public FileManager(String path) {
 		this.readFile(path);
 	}
 	
@@ -160,7 +159,8 @@ public class FileHandler {
 	 */
 	public void replace(String original, String updated) {
 		if (this.content == null) throw new Error("Could not parse file to update.");
-		this.editFile(StandardOpenOption.WRITE, this.content.replaceAll(Pattern.quote(original), updated));
+		this.content = this.content.replaceAll("(?i)(?<=[\r\n]+)(" + original + ")(?=[\r\n]+)", updated);
+		this.rewrite(this.content);
 	}
 	
 	/**
@@ -171,12 +171,5 @@ public class FileHandler {
 		for (int i = 0; i < this.stringArray.length; i++) {
 			System.out.println(this.stringArray[i]);
 		}
-	}
-
-	// For testing purposes
-	public static void main(String[] args) {
-		FileHandler file = new FileHandler("./src/lecture/test.txt");
-		file.replace("100", "30");
-		file.printFile();
 	}
 }
