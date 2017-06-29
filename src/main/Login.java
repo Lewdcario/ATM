@@ -69,7 +69,7 @@ public class Login {
 		passwordField.setBounds(178, 93, 186, 29);
 		frameLoginMenu.getContentPane().add(passwordField);
 		
-		JButton closeFrameButton = new JButton("Main Menu");
+		JButton closeFrameButton = new JButton("Login");
 		closeFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frameLoginMenu.dispose();

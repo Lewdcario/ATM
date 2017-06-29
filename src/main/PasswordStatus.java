@@ -8,10 +8,9 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
 
+public class PasswordStatus{
 
-public class CheckBalance{
-
-	JFrame frameCheckBalance;
+	JFrame framePasswordStatus;
 	/**
 	 * Launch the application.
 	 */
@@ -19,8 +18,8 @@ public class CheckBalance{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CheckBalance window = new CheckBalance();
-					window.frameCheckBalance.setVisible(true);
+					PasswordStatus window = new PasswordStatus();
+					window.framePasswordStatus.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -31,7 +30,7 @@ public class CheckBalance{
 	/**
 	 * Create the application.
 	 */
-	public CheckBalance() {
+	public PasswordStatus() {
 		initialize();
 		
 	}
@@ -42,31 +41,26 @@ public class CheckBalance{
 	
 	private void initialize() {
 		
-		frameCheckBalance = new JFrame();
-		frameCheckBalance.setBounds(100, 100, 450, 300);
-		frameCheckBalance.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameCheckBalance.getContentPane().setLayout(null);
+		framePasswordStatus = new JFrame();
+		framePasswordStatus.setBounds(100, 100, 450, 300);
+		framePasswordStatus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		framePasswordStatus.getContentPane().setLayout(null);
 		
 		JButton closeFrameButton = new JButton("Return to Main Menu");
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		closeFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frameCheckBalance.dispose();
+				framePasswordStatus.dispose();
 				menuWindow();
 			}
 		});
 		closeFrameButton.setBounds(44, 155, 338, 53);
-		frameCheckBalance.getContentPane().add(closeFrameButton);
+		framePasswordStatus.getContentPane().add(closeFrameButton);
 		
-		JLabel lblYour = new JLabel("Your current balance is ($): ");
-		lblYour.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblYour.setBounds(44, 47, 177, 45);
-		frameCheckBalance.getContentPane().add(lblYour);
-		
-		JLabel label = new JLabel("EXAMPLE AMOUNT");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label.setBounds(238, 56, 158, 27);
-		frameCheckBalance.getContentPane().add(label);
+		JLabel lblEnterOldPassword = new JLabel("New password set");
+		lblEnterOldPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblEnterOldPassword.setBounds(140, 62, 137, 40);
+		framePasswordStatus.getContentPane().add(lblEnterOldPassword);
 	}
 }

@@ -46,12 +46,12 @@ public class Menu {
 		window.frameCheckBalance.setVisible(true);
 		}
 	private void ChangePasswordMenu() {
-		CheckBalance window = new CheckBalance();
-		window.frameCheckBalance.setVisible(true);
+		ChangePassword window = new ChangePassword();
+		window.frameChangePassword.setVisible(true);
 		}
 	private void TransferMenu() {
-		CheckBalance window = new CheckBalance();
-		window.frameCheckBalance.setVisible(true);
+		Transfer window = new Transfer();
+		window.frameTransfer.setVisible(true);
 		}
 	private void LoginMenu() {
 		Login window = new Login();

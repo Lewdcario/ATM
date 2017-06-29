@@ -8,10 +8,9 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
 
+public class Deposit2{
 
-public class CheckBalance{
-
-	JFrame frameCheckBalance;
+	JFrame frameDeposit2;
 	/**
 	 * Launch the application.
 	 */
@@ -19,8 +18,8 @@ public class CheckBalance{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CheckBalance window = new CheckBalance();
-					window.frameCheckBalance.setVisible(true);
+					Deposit2 window = new Deposit2();
+					window.frameDeposit2.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -31,7 +30,7 @@ public class CheckBalance{
 	/**
 	 * Create the application.
 	 */
-	public CheckBalance() {
+	public Deposit2() {
 		initialize();
 		
 	}
@@ -42,31 +41,31 @@ public class CheckBalance{
 	
 	private void initialize() {
 		
-		frameCheckBalance = new JFrame();
-		frameCheckBalance.setBounds(100, 100, 450, 300);
-		frameCheckBalance.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameCheckBalance.getContentPane().setLayout(null);
+		frameDeposit2 = new JFrame();
+		frameDeposit2.setBounds(100, 100, 450, 300);
+		frameDeposit2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameDeposit2.getContentPane().setLayout(null);
 		
 		JButton closeFrameButton = new JButton("Return to Main Menu");
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		closeFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frameCheckBalance.dispose();
+				frameDeposit2.dispose();
 				menuWindow();
 			}
 		});
 		closeFrameButton.setBounds(44, 155, 338, 53);
-		frameCheckBalance.getContentPane().add(closeFrameButton);
+		frameDeposit2.getContentPane().add(closeFrameButton);
 		
-		JLabel lblYour = new JLabel("Your current balance is ($): ");
-		lblYour.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblYour.setBounds(44, 47, 177, 45);
-		frameCheckBalance.getContentPane().add(lblYour);
+		JLabel lblNewLabel = new JLabel("You have deposited ($):");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(44, 57, 158, 59);
+		frameDeposit2.getContentPane().add(lblNewLabel);
 		
-		JLabel label = new JLabel("EXAMPLE AMOUNT");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label.setBounds(238, 56, 158, 27);
-		frameCheckBalance.getContentPane().add(label);
+		JLabel lblExample = new JLabel("EXAMPLE AMOUNT");
+		lblExample.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblExample.setBounds(212, 57, 158, 59);
+		frameDeposit2.getContentPane().add(lblExample);
 	}
 }
