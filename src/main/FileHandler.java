@@ -92,7 +92,7 @@ public class FileHandler {
 	 * Reads the file and updates class variables.
 	 * @return Nothing.
 	 */
-	private synchronized void update() {
+	private void update() {
 		try {
 			this.setContent(new String(Files.readAllBytes(this.PATH), StandardCharsets.UTF_8));
 		} catch (IOException e) {
@@ -120,6 +120,19 @@ public class FileHandler {
 
 		return stringArr;
 	}
+	/**
+	 * Generic method for updating file.
+	 * @param option The type of file operation to perform.
+	 * @param content The content to update the file with.
+	 */
+	private synchronized void editFile(StandardOpenOption option, String content) {
+		try {
+			Files.write(this.PATH, content.getBytes(), option);
+			this.update();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Appends a line to the file.
@@ -127,13 +140,7 @@ public class FileHandler {
 	 * @return Nothing.
 	 */
 	public void addLine(String content) {
-		try {
-			String toWrite = "\n" + content;
-			Files.write(this.PATH, toWrite.getBytes(), StandardOpenOption.APPEND);
-			this.update();
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
+		this.editFile(StandardOpenOption.APPEND, "\n" + content);
 	}
 	
 	
@@ -143,12 +150,7 @@ public class FileHandler {
 	 * @return Nothing.
 	 */
 	public void rewrite(String updated) {
-		try {
-			Files.write(this.PATH, updated.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
-			this.update();
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
+		this.editFile(StandardOpenOption.TRUNCATE_EXISTING, updated);
 	}
 	
 	
@@ -159,21 +161,16 @@ public class FileHandler {
 	 * @return Nothing.
 	 * @throws IOException 
 	 */
-	public synchronized void replace(String original, String updated) {
+	public void replace(String original, String updated) {
 		if (this.content == null) throw new Error("Could not parse file to update.");
-		this.setContent(this.content.replaceAll(Pattern.quote(original), updated));
-
-		try { Files.write(this.PATH, this.content.getBytes(StandardCharsets.UTF_8), StandardOpenOption.WRITE); }
-		catch (IOException e) { System.err.println("Failed to write to file."); }
-		
-		this.update();
+		this.editFile(StandardOpenOption.WRITE, this.content.replaceAll(Pattern.quote(original), updated));
 	}
 	
 	/**
 	 * Prints the contents of the file.
 	 * @return Nothing.
 	 */
-	void printFile() {
+	public void printFile() {
 		for (int i = 0; i < this.stringArray.length; i++) {
 			System.out.println(this.stringArray[i]);
 		}
