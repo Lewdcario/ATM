@@ -1,4 +1,4 @@
-package main;
+package bank;
 
 public enum Error {
 	FILE_NOT_FOUND(0, "The specified file was not found."),
