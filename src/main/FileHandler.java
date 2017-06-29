@@ -87,7 +87,6 @@ public class FileHandler {
 		this.update();
 	}
 	
-	
 	/**
 	 * Reads the file and updates class variables.
 	 * @return Nothing.
@@ -95,10 +94,10 @@ public class FileHandler {
 	private void update() {
 		try {
 			this.setContent(new String(Files.readAllBytes(this.PATH), StandardCharsets.UTF_8));
+			this.setStringArray(this.content.split("\\r?\\n", -1));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.setStringArray(this.content.split("\\r?\\n", -1));
 	}
 	
 	/**
@@ -120,6 +119,7 @@ public class FileHandler {
 
 		return stringArr;
 	}
+
 	/**
 	 * Generic method for updating file.
 	 * @param option The type of file operation to perform.
@@ -143,7 +143,6 @@ public class FileHandler {
 		this.editFile(StandardOpenOption.APPEND, "\n" + content);
 	}
 	
-	
 	/**
 	 * Empties the file and replaces with new content.
 	 * @param content The content to update the file with.
@@ -152,14 +151,12 @@ public class FileHandler {
 	public void rewrite(String updated) {
 		this.editFile(StandardOpenOption.TRUNCATE_EXISTING, updated);
 	}
-	
-	
+		
 	/**
 	 * Replaces some content in the file with new content. Synchronized keyword ensures only
 	 * one thread can access this method at any given time.
 	 * @param content The content to update the file with.
 	 * @return Nothing.
-	 * @throws IOException 
 	 */
 	public void replace(String original, String updated) {
 		if (this.content == null) throw new Error("Could not parse file to update.");

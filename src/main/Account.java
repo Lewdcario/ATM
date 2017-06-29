@@ -1,11 +1,21 @@
 package main;
 
-public class Money {
+public class Account {
 	private int accNum;
 	private int balance;
+	private String firstName;
+	private String lastName;
 	private FileHandler accountInformation;
 	
-	public Money() {
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public Account() {
 		this.setAccountInformation(new FileHandler("./src/lecture/AccountInformation.txt"));
 	}
 	
@@ -14,14 +24,7 @@ public class Money {
 	 */
 	public int getAccNum() {
 		return this.accNum;
-	}
-
-	/**
-	 * @param accNum the accNum to set
-	 */
-	public void setAccNum(int accNum) {
-		this.accNum = accNum;
-	}
+	}	
 
 	/**
 	 * @return the balance
@@ -35,6 +38,14 @@ public class Money {
 	 */
 	public void setBalance(int balance) {
 		this.balance = balance;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	/**
