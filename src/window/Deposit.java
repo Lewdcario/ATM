@@ -1,16 +1,13 @@
 package window;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.awt.Font;
-import javax.swing.JTextField;
+
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
-public class Deposit{
+public class Deposit {
 
-	JFrame frameDeposit;
+	CustomFrame frameDeposit;
 	private JTextField textField;
 
 	/**
@@ -20,33 +17,13 @@ public class Deposit{
 		initialize();
 		
 	}
-	private void menuWindow() {
-		Menu window = new Menu();
-		window.frameMenu.setVisible(true);
-	}
-	private void menuDeposit2() {
-	Deposit2 window = new Deposit2();
-	window.frameDeposit2.setVisible(true);
-	}
 	
 	private void initialize() {
-		
-		frameDeposit = new CustomFrame();
-		// frameDeposit.setBounds(100, 100, 450, 300);
-		// frameDeposit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JButton closeFrameButton = new JButton("Return to Main Menu");
-		closeFrameButton.setBounds(44, 185, 338, 53);
-		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		frameDeposit = new CustomFrame()
+				.addCloseButton("Deposit Funds", 44, 121, 338, 53, "deposit2")
+				.addCloseButton("Return to Main menu", 44, 185, 338, 53, "menu");
 
-		closeFrameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameDeposit.dispose();
-				menuWindow();
-			}
-		});
 		frameDeposit.getContentPane().setLayout(null);
-		frameDeposit.getContentPane().add(closeFrameButton);
 		
 		textField = new JTextField();
 		textField.setBounds(217, 59, 100, 25);
@@ -55,18 +32,7 @@ public class Deposit{
 		
 		JLabel lblNewLabel = new JLabel("Deposit Amount($):");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(82, 59, 137, 27);
+		lblNewLabel.setBounds(80, 55, 137, 27);
 		frameDeposit.getContentPane().add(lblNewLabel);
-		
-		JButton btnDepositFunds = new JButton("Deposit Funds");
-		btnDepositFunds.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnDepositFunds.setBounds(44, 121, 338, 53);
-		btnDepositFunds.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameDeposit.dispose();
-				menuDeposit2();
-			}
-		});
-		frameDeposit.getContentPane().add(btnDepositFunds);
 	}
 }

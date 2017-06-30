@@ -42,40 +42,39 @@ public class FileManager {
 	/**
 	 * @param dir the dir to set
 	 */
-	public void setDir(String dir) {
+	private void setDir(String dir) {
 		this.DIR = dir;
 	}
 	
 	/**
 	 * @param path the path to set
 	 */
-	public void setPath(Path path) {
+	private void setPath(Path path) {
 		this.PATH = path;
 	}	
 
 	/**
 	 * @param contentString the contentString to set
 	 */
-	public void setContent(String contentString) {
+	private void setContent(String contentString) {
 		this.content = contentString;
 	}
 	
 	/**
 	 * @param contentString the contentString to set
 	 */
-	public void setStringArray(String[] arr) {
+	private void setStringArray(String[] arr) {
 		this.stringArray = arr;
 	}
 	
 	/**
 	 * Checks if given path exists and sets the DIR and PATH for the class.
 	 * @param path The path to attempt to read a file from.
-	 * @return Nothing.
-	 * @throws Exception 
+	 * @throws FILE_NOT_FOUND if the file was not found. 
 	 */
 	private void readFile(String path) {
 		File f = new File(path);
-		if (!f.exists() || f.isDirectory()) Error.print(0);
+		if (!f.exists() || f.isDirectory()) Error.print(Thread.currentThread().getStackTrace()[1], 0);
 		else {
 			this.setDir(f.getPath());
 			this.setPath(Paths.get(this.DIR));
@@ -85,14 +84,14 @@ public class FileManager {
 	
 	/**
 	 * Reads the file and updates class variables.
-	 * @return Nothing.
+	 * @throws DATABASE if there was an error updating the file.
 	 */
 	private void update() {
 		try {
 			this.setContent(new String(Files.readAllBytes(this.PATH), StandardCharsets.UTF_8));
 			this.setStringArray(this.content.split("\\r?\\n", -1));
 		} catch (IOException e) {
-			Error.print(1);
+			Error.print(Thread.currentThread().getStackTrace()[1], 1);
 			e.printStackTrace();
 		}
 	}
@@ -101,13 +100,14 @@ public class FileManager {
 	 * Generic method for updating file.
 	 * @param option The type of file operation to perform.
 	 * @param content The content to update the file with.
+	 * @throws DATABASE if there was an error updating the file.
 	 */
 	private synchronized void editFile(StandardOpenOption option, String content) {
 		try {
 			Files.write(this.PATH, content.getBytes(), option);
 			this.update();
 		} catch (IOException e) {
-			Error.print(1);
+			Error.print(Thread.currentThread().getStackTrace()[1], 1);
 			e.printStackTrace();
 		}
 	}
@@ -115,7 +115,6 @@ public class FileManager {
 	/**
 	 * Appends a line to the file.
 	 * @param content The content to update the file with.
-	 * @return Nothing.
 	 */
 	public void addLine(String content) {
 		this.editFile(StandardOpenOption.APPEND, "\n" + content);
@@ -124,7 +123,6 @@ public class FileManager {
 	/**
 	 * Empties the file and replaces with new content.
 	 * @param content The content to update the file with.
-	 * @return Nothing.
 	 */
 	public void rewrite(String updated) {
 		this.editFile(StandardOpenOption.TRUNCATE_EXISTING, updated);
@@ -134,7 +132,6 @@ public class FileManager {
 	 * Replaces some content in the file with new content. Synchronized keyword ensures only
 	 * one thread can access this method at any given time.
 	 * @param content The content to update the file with.
-	 * @return Nothing.
 	 */
 	public void replace(String original, String updated) {
 		this.content = this.content.replaceAll("(?i)(?<=[\r\n]+)(" + original + ")(?=[\r\n]+)", updated);
@@ -143,7 +140,6 @@ public class FileManager {
 	
 	/**
 	 * Prints the contents of the file.
-	 * @return Nothing.
 	 */
 	public void printFile() {
 		for (int i = 0; i < this.stringArray.length; i++) {

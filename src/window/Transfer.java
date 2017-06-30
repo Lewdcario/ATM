@@ -1,17 +1,13 @@
 package window;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.awt.Font;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-
 public class Transfer{
 
-	JFrame frameTransfer;
+	CustomFrame frameTransfer;
 	private JTextField textField;
 	private JTextField textField_1;
 
@@ -22,34 +18,13 @@ public class Transfer{
 		initialize();
 	}
 
-	private void menuWindow() {
-		Menu window = new Menu();
-		window.frameMenu.setVisible(true);
-	}
-
-	private void TransferStatusMenu() {
-		TransferStatus window = new TransferStatus();
-		window.frameTransferStatus.setVisible(true);
-	}
-	
 	private void initialize() {
 		
-		frameTransfer = new CustomFrame();
-		// frameTransfer.setBounds(100, 100, 450, 300);
-		// frameTransfer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameTransfer.getContentPane().setLayout(null);
-		
-		JButton closeFrameButton = new JButton("Return to Main Menu");
-		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		frameTransfer = new CustomFrame()
+				.addCloseButton("Transfer Funds", 38, 121, 338, 53, "transferStatus")
+				.addCloseButton("Return to Main menu", 38, 185, 338, 53, "menu");
 
-		closeFrameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameTransfer.dispose();
-				menuWindow();
-			}
-		});
-		closeFrameButton.setBounds(44, 185, 338, 53);
-		frameTransfer.getContentPane().add(closeFrameButton);
+		frameTransfer.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Enter Amount ($): ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -70,16 +45,5 @@ public class Transfer{
 		textField_1.setColumns(10);
 		textField_1.setBounds(188, 93, 86, 20);
 		frameTransfer.getContentPane().add(textField_1);
-		
-		JButton btnTransfering = new JButton("Transfer Funds");
-		btnTransfering.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameTransfer.dispose();
-				TransferStatusMenu();
-			}
-		});
-		btnTransfering.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnTransfering.setBounds(44, 121, 338, 53);
-		frameTransfer.getContentPane().add(btnTransfering);
 	}
 }

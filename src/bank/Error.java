@@ -7,6 +7,7 @@ public enum Error {
 	NO_SUCH_USER(3, "User does not exist."),
 	INSUFFICIENT_FUNDS(4, "User does not have sufficient funds to perform this operation."),
 	INCORRECT_LOGIN_DETAILS(5, "The provided login details are incorrect."),
+	ASSERTION(6, "An error occurred within the program. You should never receive this error."),
 	UNKNOWN_ERROR_CODE(10, "Unknown Error.");
 
 	private final int code;
@@ -43,11 +44,15 @@ public enum Error {
 		return enumForGivenCode;
 	}
 
-	public String toString() {
-		return code + ": " + description;
+	public String toString(StackTraceElement stack) {
+		return "ERROR: " + description + "\n\tat " + stack.toString();
 	}
 	
-	public static void print(int code) {
-		System.err.println(Error.fromCode(code).toString());
+	public static void print(StackTraceElement stack, int code) {
+		System.err.println(Error.fromCode(code).toString(stack));
+	}
+	
+	public static void display(int code) {
+		System.out.println("ERROR: " + Error.fromCode(code));
 	}
 }

@@ -9,6 +9,7 @@ public class Account extends FileManager {
 	private int balance;
 	private String firstName;
 	private String lastName;
+	private FileManager credentials = new FileManager("./src/bank/Password.txt");
 
 	public String getLastName() {
 		return lastName;
@@ -18,8 +19,8 @@ public class Account extends FileManager {
 		return firstName;
 	}
 
-	public Account(String id) {
-		super("./src/main/AccountInformation.txt");
+	public Account(String id) throws Exception {
+		super("./src/bank/AccountInformation.txt");
 		this.initUser(id);
 	}
 	
@@ -77,17 +78,20 @@ public class Account extends FileManager {
 	 * full name and account number.
 	 * @param id The ID to initiate the account with.
 	 */
-	private void initUser(String id) {
+	private void initUser(String id) throws Exception {
 		final Pattern pattern = Pattern.compile("(?<=" + id + ").*", Pattern.DOTALL);
 		final Matcher matcher = pattern.matcher(super.content);
 
-		if (matcher.find()) this.setAccountString(matcher.group(0).trim());
-		final String[] contents = this.accountString.split("\\r?\\n", -1);
+		if (matcher.find()) {
+			this.setAccountString(matcher.group(0).trim());
+			final String[] contents = this.accountString.split("\\r?\\n", -1);
 
-		this.setAccNum(id);
-		this.setLastName(contents[0]);
-		this.setFirstName(contents[1]);
-		this.setBalance(Integer.parseInt(contents[2]));
+			this.setAccNum(id);
+			this.setLastName(contents[0]);
+			this.setFirstName(contents[1]);
+			this.setBalance(Integer.parseInt(contents[2]));
+		}
+		else throw new Exception();// Error.print(Thread.currentThread().getStackTrace()[1], 3);
 	}
 	
 	/**
@@ -110,11 +114,25 @@ public class Account extends FileManager {
 	/**
 	 * Removes money from the user's current balance.
 	 * @param amount the amount to set
-	 * @throws errnum enough money if provided amount is greater than the user's balance.
+	 * @throws INSUFFICIENT_FUNDS if provided amount is greater than the user's balance.
 	 */
-	public void removeMoney(int amount) {
-		if (this.getBalance() < amount) Error.print(4);
-		else this.changeBalance(this.balance - amount);
+	public void removeMoney(int amount) throws Exception {
+		if (this.getBalance() < amount) throw new Exception();
+		this.changeBalance(this.balance - amount);
+	}
+	
+	/**
+	 * Withdraws amount from the current user and adds it to the target user.
+	 * @param amount the amount to transfer
+	 * @throws INSUFFICIENT_FUNDS if provided amount is greater than the user's balance.
+	 */
+	public void transferMoney(Account target, int amount) {
+		try {
+			this.removeMoney(amount);
+			target.addMoney(amount);
+		} catch(Exception e) {
+			Error.print(Thread.currentThread().getStackTrace()[1], 4);
+		}
 	}
 
 	public String toString() {
@@ -124,12 +142,18 @@ public class Account extends FileManager {
 	
 	// Testing purposes
 	public static void main(String[] args) {
-		// Classes will be instantiated from an array while reading from file
+		/*
+		new Account("3333");
+
 		Account Isabella = new Account("1118596242"); // Called when login is pressed
-		Isabella.removeMoney(50);
-		System.out.println("new balance: " + Isabella.getBalance() + "\n");
-		System.out.println("file content:");
-		Isabella.printFile();
-		Error.print(3);
+		Account Islam = new Account("111859620");
+		
+		System.out.println("Isabella balance: " + Isabella.getBalance());
+		System.out.println("Islam balance: " + Islam.getBalance());
+		Isabella.transferMoney(Islam, 999999);
+		System.out.println("After transfer");
+		System.out.println("Isabella balance: " + Isabella.getBalance());
+		System.out.println("Islam balance: " + Islam.getBalance());
+		*/
 	}
 }

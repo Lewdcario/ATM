@@ -1,53 +1,25 @@
 package window;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.JPasswordField;
 
 public class Login {
 
-	JFrame frameLoginMenu;
+	CustomFrame frameLoginMenu;
 	private JTextField textField;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					setAppearance();
-					Login window = new Login();
-					
-					window.frameLoginMenu.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	/**
 	 * Create the application.
 	 */
 	public Login() {
 		initialize();
 	}
-
-	private void menuWindow() {
-		Menu window = new Menu();
-		window.frameMenu.setVisible(true);
-	}
-	
-	
 	
 	public static void setAppearance() {
 		try {
@@ -55,12 +27,12 @@ public class Login {
 				if ("Nimbus".equals(info.getName())) {
 					UIManager.setLookAndFeel(info.getClassName());
 					break;
-					}
 				}
 			}
-			catch (Exception e) {
-				// If Nimbus is not available, you can set the GUI to another look and feel.
-			}
+		}
+		catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look and feel.
+		}
 	}
 	
 	/**
@@ -70,8 +42,6 @@ public class Login {
 		// Initializing first frame
 		frameLoginMenu = new CustomFrame();
 
-		// frameLoginMenu.setBounds(100, 100, 450, 300);
-		// frameLoginMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frameLoginMenu.getContentPane().setLayout(null);
 		
 		JLabel lblTest = new JLabel("Username");
@@ -91,14 +61,22 @@ public class Login {
 		passwordField.setBounds(178, 93, 186, 29);
 		frameLoginMenu.getContentPane().add(passwordField);
 		
-		JButton closeFrameButton = new JButton("Login");
-		closeFrameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameLoginMenu.dispose();
-				menuWindow();
+		frameLoginMenu.addLoginButton("Login", 44, 155, 338, 53, "menu", textField, passwordField);
+	}
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					setAppearance();
+					new Login().frameLoginMenu.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
-		closeFrameButton.setBounds(44, 155, 338, 53);
-		frameLoginMenu.getContentPane().add(closeFrameButton);
 	}
 }

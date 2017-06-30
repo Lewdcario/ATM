@@ -1,15 +1,12 @@
 package window;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.awt.Font;
+
 import javax.swing.JLabel;
 
 public class Deposit2{
 
-	JFrame frameDeposit2;
+	CustomFrame frameDeposit2;
 
 	/**
 	 * Create the application.
@@ -17,30 +14,13 @@ public class Deposit2{
 	public Deposit2() {
 		initialize();
 	}
-
-	private void menuWindow() {
-		Menu window = new Menu();
-		window.frameMenu.setVisible(true);
-	}
 	
 	private void initialize() {
 		
-		frameDeposit2 = new CustomFrame();
-		// frameDeposit2.setBounds(100, 100, 450, 300);
-		// frameDeposit2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameDeposit2.getContentPane().setLayout(null);
-		
-		JButton closeFrameButton = new JButton("Return to Main Menu");
-		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		frameDeposit2 = new CustomFrame()
+				.addCloseButton("Return to Main menu", 44, 155, 338, 53, "menu");
 
-		closeFrameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameDeposit2.dispose();
-				menuWindow();
-			}
-		});
-		closeFrameButton.setBounds(44, 155, 338, 53);
-		frameDeposit2.getContentPane().add(closeFrameButton);
+		frameDeposit2.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("You have deposited ($):");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));

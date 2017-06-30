@@ -1,15 +1,13 @@
 package window;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.awt.Font;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class Withdraw2{
 
-	JFrame frameWithdraw2;
+	CustomFrame frameWithdraw2;
 
 	/**
 	 * Create the application.
@@ -17,30 +15,17 @@ public class Withdraw2{
 	public Withdraw2() {
 		initialize();
 	}
-
-	private void menuWindow() {
-		Menu window = new Menu();
-		window.frameMenu.setVisible(true);
-	}
 	
 	private void initialize() {
 		
-		frameWithdraw2 = new CustomFrame();
-		// frameWithdraw2.setBounds(100, 100, 450, 300);
-		// frameWithdraw2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameWithdraw2 = new CustomFrame()
+				.addCloseButton("Return to Main menu", 44, 155, 338, 53, "menu");
+		
+		frameWithdraw2.getContentPane().setLayout(null);
 		
 		JButton closeFrameButton = new JButton("Return to Main Menu");
 		closeFrameButton.setBounds(44, 155, 338, 53);
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-
-		closeFrameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameWithdraw2.dispose();
-				menuWindow();
-			}
-		});
-		frameWithdraw2.getContentPane().setLayout(null);
-		frameWithdraw2.getContentPane().add(closeFrameButton);
 		
 		JLabel lblNewLabel = new JLabel("You have deposited($) :");
 		lblNewLabel.setBounds(79, 66, 158, 37);

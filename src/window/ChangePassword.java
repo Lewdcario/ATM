@@ -1,71 +1,28 @@
 package window;
 
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-
 public class ChangePassword{
 
-	JFrame frameChangePassword;
+	CustomFrame frameChangePassword;
 	private JTextField textField;
 	private JTextField textField_1;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChangePassword window = new ChangePassword();
-					window.frameChangePassword.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public ChangePassword() {
 		initialize();
-		
-	}
-	private void menuWindow() {
-		Menu window = new Menu();
-		window.frameMenu.setVisible(true);
-	}
-	
-	private void PasswordStatusMenu() {
-	PasswordStatus window = new PasswordStatus();
-	window.framePasswordStatus.setVisible(true);
 	}
 	
 	private void initialize() {
-		
-		frameChangePassword = new CustomFrame();
-		// frameChangePassword.setBounds(100, 100, 450, 300);
-		frameChangePassword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameChangePassword.getContentPane().setLayout(null);
-		
-		JButton closeFrameButton = new JButton("Return to Main Menu");
-		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		frameChangePassword = new CustomFrame()
+				.addCloseButton("Return to Main Menu", 38, 185, 338, 53, "menu")
+				.addCloseButton("Change Password", 38, 121, 338, 53, "passwordStatus");
 
-		closeFrameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameChangePassword.dispose();
-				menuWindow();
-			}
-		});
-		closeFrameButton.setBounds(38, 185, 338, 53);
-		frameChangePassword.getContentPane().add(closeFrameButton);
+		frameChangePassword.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Enter New Password:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -86,16 +43,5 @@ public class ChangePassword{
 		textField_1.setColumns(10);
 		textField_1.setBounds(197, 39, 124, 20);
 		frameChangePassword.getContentPane().add(textField_1);
-		
-		JButton btnReturnToMain = new JButton("Change Password");
-		btnReturnToMain.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameChangePassword.dispose();
-				PasswordStatusMenu();
-			}
-		});
-		btnReturnToMain.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnReturnToMain.setBounds(38, 121, 338, 53);
-		frameChangePassword.getContentPane().add(btnReturnToMain);
 	}
 }
