@@ -4,14 +4,14 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 
-public class Deposit2{
+public class DepositStatus{
 
 	CustomFrame frameDeposit2;
 
 	/**
 	 * Create the application.
 	 */
-	public Deposit2() {
+	public DepositStatus() {
 		initialize();
 	}
 	

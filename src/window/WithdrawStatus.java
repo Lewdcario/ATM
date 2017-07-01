@@ -5,14 +5,14 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Withdraw2{
+public class WithdrawStatus{
 
 	CustomFrame frameWithdraw2;
 
 	/**
 	 * Create the application.
 	 */
-	public Withdraw2() {
+	public WithdrawStatus() {
 		initialize();
 	}
 	

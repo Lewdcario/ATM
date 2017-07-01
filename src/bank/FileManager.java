@@ -129,8 +129,7 @@ public class FileManager {
 	}
 		
 	/**
-	 * Replaces some content in the file with new content. Synchronized keyword ensures only
-	 * one thread can access this method at any given time.
+	 * Replaces some content in the file with new content.
 	 * @param content The content to update the file with.
 	 */
 	public void replace(String original, String updated) {

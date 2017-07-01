@@ -9,19 +9,20 @@ public class Account extends FileManager {
 	private int balance;
 	private String firstName;
 	private String lastName;
-	private FileManager credentials = new FileManager("./src/bank/Password.txt");
+	private Credentials credentials;
 
+	public Account(String id) throws Exception {
+		super("./src/bank/AccountInformation.txt");
+		this.initUser(id);
+		this.credentials = new Credentials(id);
+	}
+	
 	public String getLastName() {
 		return lastName;
 	}
 
 	public String getFirstName() {
 		return firstName;
-	}
-
-	public Account(String id) throws Exception {
-		super("./src/bank/AccountInformation.txt");
-		this.initUser(id);
 	}
 	
 	/**
@@ -30,7 +31,7 @@ public class Account extends FileManager {
 	public String getAccNum() {
 		return this.accNum;
 	}
-	
+
 	/**
 	 * @param accNum the accNum to set
 	 */
@@ -43,6 +44,17 @@ public class Account extends FileManager {
 	 */
 	public int getBalance() {
 		return this.balance;
+	}
+	
+	/**
+	 * @return the credentials
+	 */
+	public Credentials getCredentials() {
+		return this.credentials;
+	}
+
+	public char[] getPassword() {
+		return this.credentials.getPassword();
 	}
 	
 	/**
@@ -123,8 +135,7 @@ public class Account extends FileManager {
 	
 	/**
 	 * Withdraws amount from the current user and adds it to the target user.
-	 * @param amount the amount to transfer
-	 * @throws INSUFFICIENT_FUNDS if provided amount is greater than the user's balance.
+	 * @param amount the <code>amount</code> to transfer
 	 */
 	public void transferMoney(Account target, int amount) {
 		try {
@@ -138,22 +149,5 @@ public class Account extends FileManager {
 	public String toString() {
 		return "Account [accNum=" + accNum + ", balance=" + balance
 				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
-	}
-	
-	// Testing purposes
-	public static void main(String[] args) {
-		/*
-		new Account("3333");
-
-		Account Isabella = new Account("1118596242"); // Called when login is pressed
-		Account Islam = new Account("111859620");
-		
-		System.out.println("Isabella balance: " + Isabella.getBalance());
-		System.out.println("Islam balance: " + Islam.getBalance());
-		Isabella.transferMoney(Islam, 999999);
-		System.out.println("After transfer");
-		System.out.println("Isabella balance: " + Isabella.getBalance());
-		System.out.println("Islam balance: " + Islam.getBalance());
-		*/
 	}
 }

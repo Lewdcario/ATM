@@ -22,6 +22,15 @@ public class CustomFrame extends JFrame {
 
 	private static final long serialVersionUID = -1165752864896879911L;
 	private JPanel contentPane;
+	private static Account session;
+	
+	private void setSession(Account session) {
+		CustomFrame.session = session;
+	}
+	
+	public Account getSession() {
+		return CustomFrame.session;
+	}
 	
 	public static class SpecialWindow {
 		public static void run(String type) {
@@ -41,7 +50,7 @@ public class CustomFrame extends JFrame {
 		}
 		
 		public static void deposit2() {
-			new Deposit2().frameDeposit2.setVisible(true);
+			new DepositStatus().frameDeposit2.setVisible(true);
 		}
 		
 		public static void withdraw() {
@@ -49,7 +58,7 @@ public class CustomFrame extends JFrame {
 		}
 		
 		public static void withdraw2() {
-			new Withdraw2().frameWithdraw2.setVisible(true);
+			new WithdrawStatus().frameWithdraw2.setVisible(true);
 		}
 		
 		public static void balance() {
@@ -117,21 +126,36 @@ public class CustomFrame extends JFrame {
 		return this;
 	}
 	
-	public void addPasswordButton(String title, int x, int y, int width, int height, String type, JPasswordField pass) {
+	public void addPasswordButton(String title, int x, int y, int width, int height, String type, JPasswordField newPass, JPasswordField oldPass) {
 		JButton closeFrameButton = new JButton(title);
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		closeFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				char[] password = { 'b', 'u', 'g', 'a', 'b', 'o', 'o' };
-				
-				if (isPasswordCorrect(pass.getPassword(), password)) {
+				if (checkPassword(oldPass.getPassword(), session.getPassword())) {
 					dispose();
 					SpecialWindow.run(type);
+					session.getCredentials().changePassword(newPass.getPassword());
 				}
 				else {
 					Error.display(5);
 				}
+			}
+		});
+
+		closeFrameButton.setBounds(x, y, width, height);
+		this.getContentPane().add(closeFrameButton);
+	}
+	
+	public void addLogoutButton(String title, int x, int y, int width, int height) {
+		JButton closeFrameButton = new JButton(title);
+		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+		closeFrameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setSession(null);
+				dispose();
+				SpecialWindow.run("login");
 			}
 		});
 
@@ -144,19 +168,17 @@ public class CustomFrame extends JFrame {
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		closeFrameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent event) {
 				Account loggedIn = null;
-				// TODO: actually get password from FileManager, which is included in the Account class.
-				// *** LOGIN INFO: user: 1111, password: group2
 				try {
 					loggedIn = new Account(user.getText());
-					// pass#getText() wont be used, but rather, our password checker function available in this file.
-					if (pass.getText().equals("group2")) {
+					if (checkPassword(loggedIn.getPassword(), pass.getPassword())) {
 						dispose();
 						SpecialWindow.run(type);
+						setSession(loggedIn);
 					}
 					else throw new Exception();
-				} catch (Exception e1) {
+				} catch (Exception e) {
 					Error.display(5);
 					JOptionPane.showMessageDialog(null, "Invalid Login Details", "Login Error", JOptionPane.ERROR_MESSAGE); 
                     user.setText(null); 
@@ -185,7 +207,7 @@ public class CustomFrame extends JFrame {
 		this.getContentPane().add(btnReset); 
 	}
 	
-	private static boolean isPasswordCorrect(char[] input, char[] correctPassword) {
+	private static boolean checkPassword(char[] input, char[] correctPassword) {
 		// https://docs.oracle.com/javase/tutorial/uiswing/components/passwordfield.html
 	    boolean isCorrect = true;
 
