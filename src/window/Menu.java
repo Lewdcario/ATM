@@ -1,7 +1,5 @@
 package window;
 
-import javax.swing.JFrame;
-
 public class Menu {
 
 	CustomFrame frameMenu;
@@ -18,12 +16,12 @@ public class Menu {
 	 */
 	private void initialize() {
 		frameMenu = new CustomFrame()
-				.addCloseButton("Deposit", 24, 30, 128, 51, "deposit")
-				.addCloseButton("Check Balance", 24, 92, 128, 51, "balance")
-				.addCloseButton("Change Password", 24, 157, 128, 51, "password")
-				.addCloseButton("Withdraw", 162, 30, 128, 51, "withdraw")
-				.addCloseButton("Transfer", 162, 92, 128, 51, "transfer")
-				.addCloseButton("Logout", 162, 157, 128, 51, "login");
+				.addCloseButton("Deposit", 45, 36, 130, 35, "deposit")
+				.addCloseButton("Check Balance", 45, 106, 130, 35, "balance")
+				.addCloseButton("Change Password", 45, 182, 130, 35, "password")
+				.addCloseButton("Withdraw", 241, 36, 122, 35, "withdraw")
+				.addCloseButton("Transfer", 241, 106, 122, 35, "transfer")
+				.addCloseButton("Logout", 241, 182, 122, 35, "login");
 
 		frameMenu.getContentPane().setLayout(null);
 	}

@@ -39,12 +39,11 @@ public class Login {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		// Initializing first frame
 		frameLoginMenu = new CustomFrame();
 
 		frameLoginMenu.getContentPane().setLayout(null);
 		
-		JLabel lblTest = new JLabel("Username");
+		JLabel lblTest = new JLabel("Account Number");
 		lblTest.setBounds(32, 44, 125, 26);
 		frameLoginMenu.getContentPane().add(lblTest);
 		
@@ -61,7 +60,8 @@ public class Login {
 		passwordField.setBounds(178, 93, 186, 29);
 		frameLoginMenu.getContentPane().add(passwordField);
 		
-		frameLoginMenu.addLoginButton("Login", 44, 155, 338, 53, "menu", textField, passwordField);
+		frameLoginMenu.addLoginButton("LOGIN", 50, 184, 113, 35, "menu", textField, passwordField);
+		frameLoginMenu.addClearButton("CLEAR", 242, 184, 113, 35, textField, passwordField);
 	}
 	
 	/**

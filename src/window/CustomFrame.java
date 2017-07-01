@@ -9,6 +9,7 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -85,8 +86,8 @@ public class CustomFrame extends JFrame {
 		this.setImage();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Bank of University of Houston");
-		this.setBounds(100, 100, 1000, 800);
+		this.setTitle("UH Bank");
+		this.setBounds(100, 100, 450, 300);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -146,25 +147,42 @@ public class CustomFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Account loggedIn = null;
 				// TODO: actually get password from FileManager, which is included in the Account class.
-				// *** LOGIN INFO: user: 12345, password: test
+				// *** LOGIN INFO: user: 1111, password: group2
 				try {
 					loggedIn = new Account(user.getText());
 					// pass#getText() wont be used, but rather, our password checker function available in this file.
-					if (pass.getText().equals("test")) {
-						System.out.println("Logged in successfully");
+					if (pass.getText().equals("group2")) {
 						dispose();
 						SpecialWindow.run(type);
 					}
 					else throw new Exception();
 				} catch (Exception e1) {
-					// TODO: Display error on screen nicely.
 					Error.display(5);
+					JOptionPane.showMessageDialog(null, "Invalid Login Details", "Login Error", JOptionPane.ERROR_MESSAGE); 
+                    user.setText(null); 
+                    pass.setText(null); 
 				}	
 			}
 		});
 
 		closeFrameButton.setBounds(x, y, width, height);
 		this.getContentPane().add(closeFrameButton);
+	}
+	
+	
+	public void addClearButton(String title, int x, int y, int width, int height, JTextField user, JPasswordField pass) {
+		JButton btnReset = new JButton(title);
+		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					user.setText(null);
+					pass.setText(null); 
+				}
+			});
+
+		btnReset.setBounds(242, 184, 113, 35);
+		this.getContentPane().add(btnReset); 
 	}
 	
 	private static boolean isPasswordCorrect(char[] input, char[] correctPassword) {
