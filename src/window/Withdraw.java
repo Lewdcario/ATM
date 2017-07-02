@@ -34,5 +34,6 @@ public class Withdraw{
 		textField.setBounds(221, 66, 86, 20);
 		frameWithdraw.getContentPane().add(textField);
 		textField.setColumns(10);
+		frameWithdraw.withdrawMath("Withdraw Funds", 44, 121, 338, 53, "withdraw2", textField);
 	}
 }

@@ -60,7 +60,7 @@ public class ATMmachine {
         txtAccountNumber.setBounds(192, 81, 128, 26); 
         frame.getContentPane().add(txtAccountNumber); 
          
-        JPasswordField txtPassword = new JPasswordField(); 
+        final JPasswordField txtPassword = new JPasswordField(); 
         txtPassword.setBounds(193, 131, 128, 29); 
         frame.getContentPane().add(txtPassword); 
          

@@ -20,7 +20,7 @@ public class Deposit {
 	
 	private void initialize() {
 		frameDeposit = new CustomFrame()
-				.addCloseButton("Deposit Funds", 44, 121, 338, 53, "deposit2")
+				/*.addCloseButton("Deposit Funds", 44, 121, 338, 53, "deposit2")*/
 				.addCloseButton("Return to Main menu", 44, 185, 338, 53, "menu");
 
 		frameDeposit.getContentPane().setLayout(null);
@@ -34,5 +34,6 @@ public class Deposit {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(80, 55, 137, 27);
 		frameDeposit.getContentPane().add(lblNewLabel);
+		frameDeposit.depositMath("Deposit Funds", 44, 121, 338, 53, "deposit2", textField);
 	}
 }

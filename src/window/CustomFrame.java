@@ -22,7 +22,7 @@ public class CustomFrame extends JFrame {
 
 	private static final long serialVersionUID = -1165752864896879911L;
 	private JPanel contentPane;
-	private static Account session;
+	static Account session;
 	
 	private void setSession(Account session) {
 		CustomFrame.session = session;
@@ -109,7 +109,7 @@ public class CustomFrame extends JFrame {
 		this.setIconImage(img.getImage());
 	}
 	
-	public CustomFrame addCloseButton(String title, int x, int y, int width, int height, String type) {
+	public CustomFrame addCloseButton(String title, int x, int y, int width, int height, final String type) {
 		JButton closeFrameButton = new JButton(title);
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
@@ -126,7 +126,7 @@ public class CustomFrame extends JFrame {
 		return this;
 	}
 	
-	public void addPasswordButton(String title, int x, int y, int width, int height, String type, JPasswordField newPass, JPasswordField oldPass) {
+	public void addPasswordButton(String title, int x, int y, int width, int height, final String type, final JPasswordField newPass, final JPasswordField oldPass) {
 		JButton closeFrameButton = new JButton(title);
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
@@ -163,7 +163,7 @@ public class CustomFrame extends JFrame {
 		this.getContentPane().add(closeFrameButton);
 	}
 	
-	public void addLoginButton(String title, int x, int y, int width, int height, String type, JTextField user, JPasswordField pass) {
+	public void addLoginButton(String title, int x, int y, int width, int height, final String type, final JTextField user, final JPasswordField pass) {
 		JButton closeFrameButton = new JButton(title);
 		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
@@ -191,8 +191,37 @@ public class CustomFrame extends JFrame {
 		this.getContentPane().add(closeFrameButton);
 	}
 	
+	public void depositMath(String title, int x, int y, int width, int height, final String type, final JTextField depositAmount) {
+		JButton closeFrameButton = new JButton(title);
+		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+		closeFrameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					dispose();
+					SpecialWindow.run(type);
+					session.addMoney(Integer.parseInt(depositAmount.getText()));
+			}
+		});
+		closeFrameButton.setBounds(x, y, width, height);
+		this.getContentPane().add(closeFrameButton);
+	}
 	
-	public void addClearButton(String title, int x, int y, int width, int height, JTextField user, JPasswordField pass) {
+	public void withdrawMath(String title, int x, int y, int width, int height, final String type, final JTextField withdrawAmount) {
+	JButton closeFrameButton = new JButton(title);
+	closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+	closeFrameButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+				dispose();
+				SpecialWindow.run(type);
+				session.removeMoney(Integer.parseInt(withdrawAmount.getText()));
+		}
+	});
+	closeFrameButton.setBounds(x, y, width, height);
+	this.getContentPane().add(closeFrameButton);
+}
+	
+	public void addClearButton(String title, int x, int y, int width, int height, final JTextField user, final JPasswordField pass) {
 		JButton btnReset = new JButton(title);
 		btnReset.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
