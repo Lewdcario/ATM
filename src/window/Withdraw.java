@@ -20,7 +20,6 @@ public class Withdraw{
 	private void initialize() {
 		
 		frameWithdraw = new CustomFrame()
-				.addCloseButton("Withdraw Funds", 38, 121, 338, 53, "withdraw2")
 				.addCloseButton("Return to Main menu", 38, 185, 338, 53, "menu");
 
 		frameWithdraw.getContentPane().setLayout(null);

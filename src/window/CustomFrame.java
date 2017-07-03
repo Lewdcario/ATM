@@ -211,9 +211,9 @@ public class CustomFrame extends JFrame {
 
 		closeFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				session.addMoney(Integer.parseInt(depositAmount.getText()));
 				dispose();
 				SpecialWindow.run(type);
-				session.addMoney(Integer.parseInt(depositAmount.getText()));
 			}
 		});
 		closeFrameButton.setBounds(x, y, width, height);
