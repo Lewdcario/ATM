@@ -137,14 +137,10 @@ public class Account extends FileManager {
 	 * Withdraws amount from the current user and adds it to the target user.
 	 * @param amount the <code>amount</code> to transfer
 	 */
-	public void transferMoney(Account target, int amount) {
-		try {
-			this.removeMoney(amount);
-			target.update();
-			target.addMoney(amount);
-		} catch(Exception e) {
-			Error.print(Thread.currentThread().getStackTrace()[1], 4);
-		}
+	public void transferMoney(Account target, int amount) throws Exception {
+		this.removeMoney(amount);
+		target.update();
+		target.addMoney(amount);
 	}
 
 	public String toString() {

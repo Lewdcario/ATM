@@ -17,17 +17,19 @@ public class TransferStatus{
 	
 	private void initialize() {
 		
-		frameTransferStatus = new CustomFrame().addCloseButton("Return to Main menu", 44, 155, 338, 53, "menu");
+		frameTransferStatus = new CustomFrame()
+				.addCloseButton("Return to Main menu", 44, 155, 338, 53, "menu");
+
 		frameTransferStatus.getContentPane().setLayout(null);
 		
-		JLabel lblTransferTo = new JLabel("Transfer Sucessful.");
+		JLabel lblTransferTo = new JLabel("Success!");
 		lblTransferTo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblTransferTo.setBounds(124, 36, 92, 36);
 		frameTransferStatus.getContentPane().add(lblTransferTo);
 		
-		JLabel lblPersonex = new JLabel("New Balance is: "+frameTransferStatus.getSession().getBalance());
+		JLabel lblPersonex = new JLabel("New Balance: $" + frameTransferStatus.getSession().getBalance());
 		lblPersonex.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPersonex.setBounds(242, 36, 102, 36);
+		lblPersonex.setBounds(200, 36, 150, 36);
 		frameTransferStatus.getContentPane().add(lblPersonex);
 	}
 }

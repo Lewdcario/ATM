@@ -21,7 +21,6 @@ public class Transfer{
 	private void initialize() {
 		
 		frameTransfer = new CustomFrame()
-				.addCloseButton("Transfer Funds", 38, 121, 338, 53, "transferStatus")
 				.addCloseButton("Return to Main menu", 38, 185, 338, 53, "menu");
 
 		frameTransfer.getContentPane().setLayout(null);
@@ -45,5 +44,7 @@ public class Transfer{
 		textField_1.setColumns(10);
 		textField_1.setBounds(188, 93, 86, 20);
 		frameTransfer.getContentPane().add(textField_1);
+		
+		frameTransfer.transferMoney("Transfer Funds", 38, 121, 338, 53, "transferStatus", textField, textField_1);
 	}
 }

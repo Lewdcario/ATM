@@ -211,9 +211,35 @@ public class CustomFrame extends JFrame {
 
 		closeFrameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					dispose();
-					SpecialWindow.run(type);
-					session.addMoney(Integer.parseInt(depositAmount.getText()));
+				dispose();
+				SpecialWindow.run(type);
+				session.addMoney(Integer.parseInt(depositAmount.getText()));
+			}
+		});
+		closeFrameButton.setBounds(x, y, width, height);
+		this.getContentPane().add(closeFrameButton);
+	}
+	
+	public void transferMoney(String title, int x, int y, int width, int height, final String type, final JTextField depositAmount, final JTextField targetUser) {
+		JButton closeFrameButton = new JButton(title);
+		closeFrameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	
+		closeFrameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Account target = new Account(targetUser.getText());
+					try {
+						session.transferMoney(target, Integer.parseInt(depositAmount.getText()));
+						dispose();
+						SpecialWindow.run(type);
+					} catch(Exception error) {
+						Error.display(4);
+						JOptionPane.showMessageDialog(null, "You do not have the sufficient funds to perform this transaction", "Insufficient Funds Error", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (Exception e1) {
+					Error.display(3);
+					JOptionPane.showMessageDialog(null, "Target user does not exist", "No Such User Error", JOptionPane.ERROR_MESSAGE); 
+				}
 			}
 		});
 		closeFrameButton.setBounds(x, y, width, height);
