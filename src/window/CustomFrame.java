@@ -34,12 +34,25 @@ public class CustomFrame extends JFrame {
 	
 	public static class SpecialWindow {
 		public static void run(String type) {
+			/*
 			try {
 				SpecialWindow.class.getDeclaredMethod(type).invoke(SpecialWindow.class, (Object[]) null);
 			} catch (Exception e) {
 				Error.print(Thread.currentThread().getStackTrace()[1], 6);
 				e.printStackTrace();
 			}
+			*/
+			if (type == "menu") menu();
+			else if (type == "deposit") deposit();
+			else if (type == "deposit2") deposit2();
+			else if (type == "withdraw") withdraw();
+			else if (type == "withdraw2") withdraw2();
+			else if (type == "balance") balance();
+			else if (type == "password") password();
+			else if (type == "passwordStatus") passwordStatus();
+			else if (type == "transfer") transfer();
+			else if (type == "transferStatus") transferStatus();
+			else if (type == "login") login();
 		}
 		public static void menu() {
 			new Menu().frameMenu.setVisible(true);
@@ -139,6 +152,7 @@ public class CustomFrame extends JFrame {
 				}
 				else {
 					Error.display(5);
+					JOptionPane.showMessageDialog(null, "Invalid Password", "Password Update Error", JOptionPane.ERROR_MESSAGE); 
 				}
 			}
 		});
@@ -212,9 +226,14 @@ public class CustomFrame extends JFrame {
 
 	closeFrameButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-				dispose();
-				SpecialWindow.run(type);
-				session.removeMoney(Integer.parseInt(withdrawAmount.getText()));
+				try {
+					session.removeMoney(Integer.parseInt(withdrawAmount.getText()));
+					dispose();
+					SpecialWindow.run(type);
+				} catch (Exception error) {
+					Error.display(4);
+					JOptionPane.showMessageDialog(null, "Insufficient Funds", "Withdraw Error", JOptionPane.ERROR_MESSAGE); 
+				}
 		}
 	});
 	closeFrameButton.setBounds(x, y, width, height);

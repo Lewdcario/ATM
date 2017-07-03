@@ -27,7 +27,7 @@ public class DepositStatus{
 		lblNewLabel.setBounds(44, 57, 158, 59);
 		frameDeposit2.getContentPane().add(lblNewLabel);
 		
-		JLabel lblExample = new JLabel("New Balance$: "+CustomFrame.session.getBalance());
+		JLabel lblExample = new JLabel("New Balance: $" + frameDeposit2.getSession().getBalance());
 		lblExample.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblExample.setBounds(212, 57, 158, 59);
 		frameDeposit2.getContentPane().add(lblExample);

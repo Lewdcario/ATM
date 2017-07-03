@@ -32,7 +32,7 @@ public class WithdrawStatus{
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frameWithdraw2.getContentPane().add(lblNewLabel);
 		
-		JLabel lblYourNewBalance = new JLabel("New Balance$: "+CustomFrame.session.getBalance());
+		JLabel lblYourNewBalance = new JLabel("New Balance$: "+frameWithdraw2.getSession().getBalance());
 		lblYourNewBalance.setBounds(79, 107, 149, 27);
 		lblYourNewBalance.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frameWithdraw2.getContentPane().add(lblYourNewBalance);

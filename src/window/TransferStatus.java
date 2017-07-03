@@ -25,7 +25,7 @@ public class TransferStatus{
 		lblTransferTo.setBounds(124, 36, 92, 36);
 		frameTransferStatus.getContentPane().add(lblTransferTo);
 		
-		JLabel lblPersonex = new JLabel("New Balance is: "+CustomFrame.session.getBalance());
+		JLabel lblPersonex = new JLabel("New Balance is: "+frameTransferStatus.getSession().getBalance());
 		lblPersonex.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPersonex.setBounds(242, 36, 102, 36);
 		frameTransferStatus.getContentPane().add(lblPersonex);

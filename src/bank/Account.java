@@ -126,10 +126,10 @@ public class Account extends FileManager {
 	/**
 	 * Removes money from the user's current balance.
 	 * @param amount the amount to set
-	 * @throws INSUFFICIENT_FUNDS if provided amount is greater than the user's balance.
+	 * @throws Exception if provided amount is greater than the user's balance.
 	 */
 	public void removeMoney(int amount) throws Exception {
-		if (this.getBalance() < amount) throw new Exception();
+		if (this.getBalance() < amount) throw new Exception("Insufficient funds");
 		this.changeBalance(this.balance - amount);
 	}
 	
@@ -140,6 +140,7 @@ public class Account extends FileManager {
 	public void transferMoney(Account target, int amount) {
 		try {
 			this.removeMoney(amount);
+			target.update();
 			target.addMoney(amount);
 		} catch(Exception e) {
 			Error.print(Thread.currentThread().getStackTrace()[1], 4);
@@ -149,5 +150,20 @@ public class Account extends FileManager {
 	public String toString() {
 		return "Account [accNum=" + accNum + ", balance=" + balance
 				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+
+	public static void main(String...args) throws Exception {
+		Account isa = new Account("1111");
+		// Account isl = new Account("111859620");	
+		
+		System.out.println("bank before withdraw: " + isa.getBalance());
+		isa.removeMoney(100);
+		System.out.println("isa bank after withdraw money: " + isa.getBalance());
+		
+		/*
+		isa.transferMoney(isl, 10);
+		System.out.println("isa balance: " + isa.getBalance());
+		System.out.println("isl balance: " + isl.getBalance());
+		*/
 	}
 }

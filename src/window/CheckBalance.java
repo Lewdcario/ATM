@@ -23,7 +23,7 @@ public class CheckBalance {
 		lblYour.setBounds(44, 47, 177, 45);
 		frameCheckBalance.getContentPane().add(lblYour);
 		
-		JLabel label = new JLabel(""+CustomFrame.session.getBalance());
+		JLabel label = new JLabel(""+frameCheckBalance.getSession().getBalance());
 		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		label.setBounds(238, 56, 158, 27);
 		frameCheckBalance.getContentPane().add(label);

@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
 public class AdminPanel extends JPanel implements ActionListener{
-	
+	private static final long serialVersionUID = -5732186894062841492L;
 	private boolean alphabetical = false;
 	private boolean highest_balance = false;
 	private boolean single_cust = false;

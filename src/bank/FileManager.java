@@ -54,7 +54,7 @@ public class FileManager {
 	}	
 
 	/**
-	 * @param contentString the contentString to set
+	 * @param content the content to set
 	 */
 	private void setContent(String contentString) {
 		this.content = contentString;
@@ -86,7 +86,7 @@ public class FileManager {
 	 * Reads the file and updates class variables.
 	 * @throws DATABASE if there was an error updating the file.
 	 */
-	private void update() {
+	protected void update() {
 		try {
 			this.setContent(new String(Files.readAllBytes(this.PATH), StandardCharsets.UTF_8));
 			this.setStringArray(this.content.split("\\r?\\n", -1));

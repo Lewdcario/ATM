@@ -20,7 +20,6 @@ public class Deposit {
 	
 	private void initialize() {
 		frameDeposit = new CustomFrame()
-				/*.addCloseButton("Deposit Funds", 44, 121, 338, 53, "deposit2")*/
 				.addCloseButton("Return to Main menu", 44, 185, 338, 53, "menu");
 
 		frameDeposit.getContentPane().setLayout(null);
